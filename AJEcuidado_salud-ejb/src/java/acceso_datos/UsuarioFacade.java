@@ -4,6 +4,7 @@
  */
 package acceso_datos;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -26,6 +27,24 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
 
     public UsuarioFacade() {
         super(Usuario.class);
+    }
+    
+    public Usuario findUser(String name, String password) {
+        EntityManager em = getEntityManager();
+        
+        String query = "SELECT * FROM USUARIO WHERE NOMBREUSUARIO="+"'"+name+"'"+" AND PASSWORD="+"'"+password+"'";
+        
+        Usuario user = null;
+        List<Usuario> users = null;
+        try {
+            users = em.createNativeQuery(query, Usuario.class).getResultList();
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+        if(users != null) {
+            user = users.get(0);
+        }
+        return user;
     }
     
 }

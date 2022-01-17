@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>inicio sesión</title>
+    </h:head>
+    <h:body>
+        <center>
+            <f:view>
+                <h:form>
+                    <h1><h:outputText value="Inicio de Sesión"/></h1>
+                    <h:panelGrid columns="2">
+                        <h:outputLabel value="Nombre de usuario:" for="nombre" />
+                        <h:inputText id="nombre" value="#{acceso.nameUser}" title="nameUser" />
+                        <h:outputLabel value="contraseña:" for="password" />
+                        <h:inputSecret value="#{acceso.password}" id="password" title="password" />
+                    </h:panelGrid>
+                    <br />
+                    <h:commandButton value="Inicar Sesión" actionListener="#{acceso.autenticarse()}" />
+                </h:form>
+            </f:view>
+
+            <h:form>
+                <br />
+                <h:commandLink value="Registrarse" action="registrar_usuario.xhtml" />
+                <br />
+                <h:commandLink value="Regresar" action="index.xhtml" />
+            </h:form> 
+
+        </center>
+    </h:body>
+</html>
+

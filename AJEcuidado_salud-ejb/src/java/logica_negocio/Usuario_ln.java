@@ -30,7 +30,7 @@ public class Usuario_ln {
         return usuarioFacade.findAll();
     }
     
-    public Usuario recuperaUsuario(int id) {
-        return usuarioFacade.find(id);
+    public Usuario recuperaUsuario(String name, String password) {
+        return usuarioFacade.findUser(name, password);
     }
 }
