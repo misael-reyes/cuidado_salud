@@ -7,6 +7,7 @@ package controlador;
 import java.io.IOException;
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
@@ -83,7 +84,7 @@ public class Acceso implements Serializable {
     public void autenticarse() throws IOException {
         user = usuario_ln.recuperaUsuario(nameUser, password);
         if (user != null) {
-            FacesContext.getCurrentInstance().getExternalContext().redirect("ingresar_medidas.xhtml");
+            FacesContext.getCurrentInstance().getExternalContext().redirect("acceso.xhtml");
         } else {
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Credenciales invalidas", "Credenciales invalidas");
             FacesContext.getCurrentInstance().addMessage(null, message);
@@ -107,5 +108,9 @@ public class Acceso implements Serializable {
         long miliseconds = System.currentTimeMillis();
         Date date = new Date(miliseconds);
         return date;
+    }
+    
+    public List<Medicion> lista_m() {
+        return medicion_ln.lista_m();
     }
 }

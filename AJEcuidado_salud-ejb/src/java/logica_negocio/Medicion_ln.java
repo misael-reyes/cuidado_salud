@@ -26,7 +26,7 @@ public class Medicion_ln {
         medicionFacade.create(medicion);
     }
     
-    public List<Medicion> lista_u() {
+    public List<Medicion> lista_m() {
         return medicionFacade.findAll();
     }
     

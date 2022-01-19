@@ -13,16 +13,18 @@
             </ui:define>
 
             <ui:define name="contentenido">
-                <h:form>
-                    <h:panelGrid columns="2">
-                        <h:outputLabel value="Nombre de usuario:" for="nombre" />
-                        <h:inputText id="nombre" value="#{acceso.nameUser}" title="nameUser" />
-                        <h:outputLabel value="contraseña:" for="password" />
-                        <h:inputSecret value="#{acceso.password}" id="password" title="password" />
-                    </h:panelGrid>
-                    <br />
-                    <h:commandButton value="Inicar Sesión" actionListener="#{acceso.autenticarse()}" />
-                </h:form>
+                <center>
+                    <h:form>
+                        <h:panelGrid columns="2">
+                            <h:outputLabel value="Nombre de usuario:" for="nombre" />
+                            <h:inputText id="nombre" value="#{acceso.nameUser}" title="nameUser" required="true" requiredMessage="ingrese el nobre"/>
+                            <h:outputLabel value="contraseña:" for="password" />
+                            <h:inputSecret value="#{acceso.password}" id="password" title="password" required="true" requiredMessage="ingrese la contraseña" />
+                        </h:panelGrid>
+                        <br />
+                        <h:commandButton value="Inicar Sesión" actionListener="#{acceso.autenticarse()}" />
+                    </h:form>
+                </center>
             </ui:define>
 
             <ui:define name="inferior">
