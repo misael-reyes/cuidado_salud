@@ -14,18 +14,25 @@
     <h:body>
 
         <div id="top">
-            <ui:insert name="top">Top</ui:insert>
+            <br/>
+            <center>
+                <h2><h:outputText value="Bienvenid@ #{acceso.nameUser}"/></h2>
+                <h:form>
+                    <h:commandButton value="Ver información" action="acceso.xhtml" />
+                    <h:commandButton value="Registrar datos" action="registro_medidas.xhtml" />
+                    <h:commandButton value="Datos estadisticos" action="estadisticas.xhtml" />
+                </h:form>
+            </center>
         </div>
-        <div>
-            <div id="left">
-                <ui:insert name="left">Left</ui:insert>
-            </div>
-            <div id="content" class="left_content">
-                <ui:insert name="content">Content</ui:insert>
-            </div>
+
+        <div id="content" class="center_content">
+            <ui:insert name="content">Content</ui:insert>
         </div>
+
         <div id="bottom">
-            <ui:insert name="bottom">Bottom</ui:insert>
+            <center>
+                <h3><h:outputText value="Datos adicionales"/></h3>
+            </center>
         </div>
 
     </h:body>

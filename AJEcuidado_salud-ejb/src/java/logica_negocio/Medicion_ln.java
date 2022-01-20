@@ -30,6 +30,10 @@ public class Medicion_ln {
         return medicionFacade.findAll();
     }
     
+    public List<Medicion> listam(int iduser) {
+        return medicionFacade.findAllMedicion(iduser);
+    }
+    
     public Medicion recuperaUsuario(int id) {
         return medicionFacade.find(id);
     }

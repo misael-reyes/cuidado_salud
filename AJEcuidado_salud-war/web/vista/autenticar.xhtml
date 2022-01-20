@@ -8,11 +8,13 @@
 
         <ui:composition template="./../templates/leer_datos.xhtml">
 
-            <ui:define name="arriba">
-                <h2><h:outputText value="Autenticarse"/></h2>
+            <ui:define name="top">
+                <center>
+                    <h2><h:outputText value="Autenticarse"/></h2>
+                </center>
             </ui:define>
 
-            <ui:define name="contentenido">
+            <ui:define name="content">
                 <center>
                     <h:form>
                         <h:panelGrid columns="2">
@@ -23,11 +25,16 @@
                         </h:panelGrid>
                         <br />
                         <h:commandButton value="Inicar Sesión" actionListener="#{acceso.autenticarse()}" />
+                        <br/>
+                        
+                    </h:form>
+                    <h:form>
+                        <h:commandButton value="Registrarse" action="registrar_user.xhtml" />
                     </h:form>
                 </center>
             </ui:define>
 
-            <ui:define name="inferior">
+            <ui:define name="bottom">
                 Datos adicionales
             </ui:define>
 

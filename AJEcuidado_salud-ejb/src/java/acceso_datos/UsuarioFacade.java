@@ -41,7 +41,7 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
         } catch (Exception e) {
             System.err.println(e);
         }
-        if(users != null) {
+        if(!users.isEmpty()) {
             user = users.get(0);
         }
         return user;

@@ -7,6 +7,11 @@ package controlador;
 import java.io.IOException;
 import java.io.Serializable;
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
@@ -41,6 +46,11 @@ public class Acceso implements Serializable {
     //atributos para autenticarse
     private String nameUser;
     private String password;
+
+    //atributo para callcular los indices
+    private String fecha;
+    private double IMC = 0.0;
+    private double ICC = 0.0;
 
     public Acceso() {
         user = new Usuario();
@@ -80,6 +90,30 @@ public class Acceso implements Serializable {
         this.medicion = medicion;
     }
 
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
+
+    public double getIMC() {
+        return IMC;
+    }
+
+    public void setIMC(double IMC) {
+        this.IMC = IMC;
+    }
+
+    public double getICC() {
+        return ICC;
+    }
+
+    public void setICC(double ICC) {
+        this.ICC = ICC;
+    }
+
     //MÉTODOS DEL BEAN ADMINISTRABLE
     public void autenticarse() throws IOException {
         user = usuario_ln.recuperaUsuario(nameUser, password);
@@ -93,7 +127,7 @@ public class Acceso implements Serializable {
 
     public void registrarse() throws IOException {
         usuario_ln.guardar(user);
-        FacesContext.getCurrentInstance().getExternalContext().redirect("inicio_sesion.xhtml");
+        FacesContext.getCurrentInstance().getExternalContext().redirect("autenticar.xhtml");
     }
 
     public void registroMediciones() {
@@ -103,14 +137,64 @@ public class Acceso implements Serializable {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Se registraron los datos con exito", "Se registraron los datos con exito");
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
-    
+
     private Date obtenerFecha() {
         long miliseconds = System.currentTimeMillis();
         Date date = new Date(miliseconds);
         return date;
     }
-    
+
     public List<Medicion> lista_m() {
-        return medicion_ln.lista_m();
+        return medicion_ln.listam(user.getIdusuario());
+    }
+
+    /*
+    public List<Date> lista_fechas() {
+        List<Medicion> list_med = lista_m();
+        List<Date> list_date = new ArrayList<Date>();
+        for(Medicion med: list_med) {
+            
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            String formattedDate = simpleDateFormat.format(med.getFecha());
+
+           list_date.add(Date.valueOf(formattedDate));
+        }
+        return list_date;
+    }*/
+    public List<java.util.Date> lista_fechas() {
+        //Calendar cal = Calendar.getInstance();
+//cal.setTime(resultado.getDate(5, null));
+        List<Medicion> list_med = lista_m();
+        List<java.util.Date> list_date = new ArrayList<java.util.Date>();
+        for (Medicion med : list_med) {
+            //cal.setTime(med.getFecha());
+            list_date.add(med.getFecha());
+        }
+        return list_date;
+    }
+
+    public void calcularIndices() {
+        List<Medicion> lista = lista_m();
+        List<Medicion> listam = new ArrayList<Medicion>();
+        for (Medicion m : lista) {
+            String fe = m.getFecha().toString();
+            if(fe.equals(fecha))
+                listam.add(m);
+        }
+        int peso = listam.get(0).getPeso();
+        int altura = user.getEstatura();
+        int cintura = listam.get(0).getCintura();
+        int cadera = listam.get(0).getCadera();
+        IMC = calculaIMC(peso, altura);
+        ICC = calculaICC(cadera, cintura);
+    }
+    
+    private double calculaIMC(int peso, int altura) {
+        double alturametros = (double)altura/100;
+        return peso/(Math.pow(alturametros, 2));
+    }
+    
+    private double calculaICC(int cadera, int cintura) {
+        return (double) cintura/cadera;
     }
 }

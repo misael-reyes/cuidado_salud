@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../templates/dashboard.xhtml">
+
+            <ui:define name="content">
+                <center>
+                    <f:view>
+                        <h:form>
+                            <h2><h:outputText value="Ingrese las medidas"/></h2>
+                            <h:panelGrid columns="2">
+                                <h:outputLabel value="Peso(kg):" for="peso" />
+                                <h:inputText id="peso" value="#{acceso.medicion.peso}" title="Peso" />
+                                <h:outputLabel value="Cintura(cm):" for="cintura" />
+                                <h:inputText id="cintura" value="#{acceso.medicion.cintura}" title="Cintura" />
+                                <h:outputLabel value="Cadera(cm):" for="cadera" />
+                                <h:inputText id="cadera" value="#{acceso.medicion.cadera}" title="Cadera" />
+                                <h:outputLabel value="Actividad:" for="actividad" />
+                                <h:inputText id="actividad" value="#{acceso.medicion.actividad}" title="Actividad" />
+                            </h:panelGrid>
+                            <br />
+                            <h:commandButton value="Registrar" actionListener="#{acceso.registroMediciones()}" />
+                        </h:form>
+                    </f:view>
+
+                </center>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

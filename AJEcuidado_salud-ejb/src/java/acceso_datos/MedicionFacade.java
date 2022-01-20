@@ -4,6 +4,7 @@
  */
 package acceso_datos;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -26,6 +27,21 @@ public class MedicionFacade extends AbstractFacade<Medicion> {
 
     public MedicionFacade() {
         super(Medicion.class);
+    }
+    
+    public List<Medicion> findAllMedicion(int id) {
+        EntityManager em = getEntityManager();
+        
+        String query = "SELECT * FROM MEDICION WHERE USUARIO="+id;
+        
+        List<Medicion> mediciones = null;
+        try {
+            mediciones = em.createNativeQuery(query, Medicion.class).getResultList();
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+
+        return mediciones;
     }
     
 }

@@ -7,27 +7,7 @@
 
     <body>
 
-        <ui:composition template="./../templates/menu_acceso.xhtml">
-
-            <ui:define name="top">
-                <center>
-                    <h2><h:outputText value="Bienvenido #{acceso.nameUser}"/></h2>
-                </center>
-            </ui:define>
-
-            <ui:define name="left">
-                <h2><h:outputText value="Acciones"/></h2>
-                <br/>
-                <h:form>
-                    <h:commandButton value="Ver información" actionListener="#{acceso.autenticarse()}" />
-                    <br/>
-                    <h:commandButton value="Calculo de indices" actionListener="#{acceso.autenticarse()}" />
-                    <br/>
-                    <h:commandButton value="Registrar datos" actionListener="#{acceso.autenticarse()}" />
-                    <br/>
-                    <h:commandButton value="Datos estadisticos" actionListener="#{acceso.autenticarse()}" />
-                </h:form>
-            </ui:define>
+        <ui:composition template="./../templates/dashboard.xhtml">
 
             <ui:define name="content">
                 <center>
@@ -48,8 +28,6 @@
                     </h:form>
                     <br/>
                     <f:view>
-
-
                         <h:form>
                             <h1><h:outputText value="Datos antropometricos"/></h1>
                             <h:dataTable value="#{acceso.lista_m()}" var="item">
@@ -100,12 +78,19 @@
                             </h:dataTable>
                         </h:form>
                     </f:view>
-
+                    <br/>
+                    <h:form>
+                        <h:outputLabel value="Seleccione una fecha: " for="date"/>
+                        <h:selectOneMenu id="date" value="#{acceso.fecha}" title="fecha">
+                            <f:selectItems value="#{acceso.lista_fechas()}" var="f" itemLabel="#{f}" itemValue="#{f}" />
+                        </h:selectOneMenu>
+                        <h:commandButton value="Calcular de indices" actionListener="#{acceso.calcularIndices()}" />
+                        <br/>
+                        <h:outputText value="IMC: #{acceso.IMC}"/>
+                        <br/>
+                        <h:outputText value="ICC: #{acceso.ICC}"/>
+                    </h:form>
                 </center>
-            </ui:define>
-
-            <ui:define name="bottom">
-                Datos adicionales
             </ui:define>
 
         </ui:composition>
