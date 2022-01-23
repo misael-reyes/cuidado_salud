@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../templates/dashboard.xhtml">
+
+            <ui:define name="content">
+                <center>
+                    <f:view>
+                        <h:form>
+                            <h1><h:outputText value="Determina las raciones"/></h1>
+                            <h:dataTable value="#{estimacion.lista_grupos()}" var="item">
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Grupo Alimento"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.nombre}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Desayuno"/>
+                                    </f:facet>
+                                    <h:inputText value="#{estimacion.desayuno[item.idgrupo.intValue()-1]}" title="desayuno" />
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Colación matutina"/>
+                                    </f:facet>
+                                    <h:inputText value="#{estimacion.colMatutina[item.idgrupo.intValue()-1]}" title="Sexo" />
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Comida"/>
+                                    </f:facet>
+                                    <h:inputText value="#{estimacion.comida[item.idgrupo.intValue()-1]}" title="Sexo" />
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Colación tarde"/>
+                                    </f:facet>
+                                    <h:inputText value="#{estimacion.colTarde[item.idgrupo.intValue()-1]}" title="Sexo" />
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Cena"/>
+                                    </f:facet>
+                                    <h:inputText value="#{estimacion.cena[item.idgrupo.intValue()-1]}" title="Sexo" />
+                                </h:column>
+                            </h:dataTable>
+                            <!--</h:form>-->
+                            <!--</f:view>-->
+                            <br/>
+                            <!--<h:form>-->
+                            <h:outputLabel value="Número de kilocalorias necesarias: " for="k"/>
+                            <h:inputText id="k" value="#{estimacion.kcal_necesarias}" title="kcal" />
+                            <h:commandButton value="Calcular Kilocalorias" actionListener="#{estimacion.calcularKcal()}" />
+                            <br/>
+                            <h:outputText value="Kilocalorias desayuno: #{estimacion.kdesayuno}"/>
+                            <h:outputText value="  Kilocalorias colación matutina: #{estimacion.kcolMatutina}"/>
+                            <h:outputText value="  Kilocalorias comida: #{estimacion.kcomida}"/>
+                            <h:outputText value="  Kilocalorias colación tarde: #{estimacion.kcolTarde}"/>
+                            <h:outputText value="  Kilocalorias cena: #{estimacion.kcena}"/>
+                            <br/>
+                            <h:outputText value="Total de kilocalorias #{estimacion.kcal}"/>
+                        </h:form>
+                    </f:view>
+                </center>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
