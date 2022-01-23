@@ -7,11 +7,7 @@ package controlador;
 import java.io.IOException;
 import java.io.Serializable;
 import java.sql.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
@@ -40,7 +36,7 @@ public class Acceso implements Serializable {
     private Medicion_ln medicion_ln;
 
     //atributos entity
-    private Usuario user;
+    protected static Usuario user;
     private Medicion medicion;
 
     //atributos para autenticarse
@@ -148,26 +144,10 @@ public class Acceso implements Serializable {
         return medicion_ln.listam(user.getIdusuario());
     }
 
-    /*
-    public List<Date> lista_fechas() {
-        List<Medicion> list_med = lista_m();
-        List<Date> list_date = new ArrayList<Date>();
-        for(Medicion med: list_med) {
-            
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            String formattedDate = simpleDateFormat.format(med.getFecha());
-
-           list_date.add(Date.valueOf(formattedDate));
-        }
-        return list_date;
-    }*/
     public List<java.util.Date> lista_fechas() {
-        //Calendar cal = Calendar.getInstance();
-//cal.setTime(resultado.getDate(5, null));
         List<Medicion> list_med = lista_m();
         List<java.util.Date> list_date = new ArrayList<java.util.Date>();
         for (Medicion med : list_med) {
-            //cal.setTime(med.getFecha());
             list_date.add(med.getFecha());
         }
         return list_date;

@@ -19,7 +19,9 @@
                 <h2><h:outputText value="Bienvenid@ #{acceso.nameUser}"/></h2>
                 <h:form>
                     <h:commandButton value="Ver información" action="acceso.xhtml" />
+                    <h:commandButton value="Calcular kilocalorias" action="calcular_kilocalorias.xhtml"/>
                     <h:commandButton value="Registrar datos" action="registro_medidas.xhtml" />
+                    <h:commandButton value="Registrar actividad" action="registro_actividad.xhtml" />
                     <h:commandButton value="Datos estadisticos" action="estadisticas.xhtml" />
                 </h:form>
             </center>
@@ -30,9 +32,7 @@
         </div>
 
         <div id="bottom">
-            <center>
-                <h3><h:outputText value="Datos adicionales"/></h3>
-            </center>
+                <h3><h:outputText value="Desarrollado por Esteban Misael Reyes Cruz"/></h3>
         </div>
 
     </h:body>

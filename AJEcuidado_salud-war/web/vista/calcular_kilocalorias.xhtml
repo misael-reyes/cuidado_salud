@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../templates/dashboard.xhtml">
+
+            <ui:define name="content">
+                <center>
+                    <f:view>
+
+                        <h:form>
+                            <h1><h:outputText value="Actividades del usuario #{calculadora.usuario.nombreusuario}"/></h1>
+                            <h:dataTable value="#{calculadora.lista_actuser()}" var="item">
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Id"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idau}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Descripción"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.descripcion}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Fecha inicial"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.fecha1}">
+                                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                                    </h:outputText>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Fecha final"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.fecha2}">
+                                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                                    </h:outputText>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Tipo actividad"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.tipoactividad.descripcion}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Usuario"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.usuario.nombreusuario}"/>
+                                </h:column>
+                            </h:dataTable>
+                        </h:form>
+                    </f:view>
+                    <br/>
+                    <h:form>
+                        <h:outputLabel value="Selecciona el ID de la actividad: " for="id"/>
+                        <h:selectOneMenu id="id" value="#{calculadora.idAU}" title="idAU">
+                            <f:selectItems value="#{calculadora.lista_idActividades()}" var="i" itemLabel="#{i}" itemValue="#{i}" />
+                        </h:selectOneMenu>
+                        <h:commandButton value="Calcular kilocalorías" actionListener="#{calculadora.calcularKilocalorias()}" />
+                        <br/>
+                        <h:outputText value="Kilocalorías: #{calculadora.kilocalorias}"/>
+                    </h:form>
+                </center>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

@@ -8,14 +8,14 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import modelo.Medicion;
+import modelo.Actividadusuario;
 
 /**
  *
  * @author Misael
  */
 @Stateless
-public class MedicionFacade extends AbstractFacade<Medicion> {
+public class ActividadusuarioFacade extends AbstractFacade<Actividadusuario> {
 
     @PersistenceContext(unitName = "AJEcuidado_salud-ejbPU")
     private EntityManager em;
@@ -25,22 +25,23 @@ public class MedicionFacade extends AbstractFacade<Medicion> {
         return em;
     }
 
-    public MedicionFacade() {
-        super(Medicion.class);
+    public ActividadusuarioFacade() {
+        super(Actividadusuario.class);
     }
     
-    public List<Medicion> findAllMedicion(int id) {
+    public List<Actividadusuario> findAllActividades(int id) {
         EntityManager em = getEntityManager();
         
-        String query = "SELECT * FROM MEDICION WHERE USUARIO="+id;
+        String query = "SELECT * FROM ACTIViDADUSUARIO WHERE USUARIO="+id;
         
-        List<Medicion> mediciones = null;
+        List<Actividadusuario> actividades = null;
         try {
-            mediciones = em.createNativeQuery(query, Medicion.class).getResultList();
+            actividades = em.createNativeQuery(query, Actividadusuario.class).getResultList();
         } catch (Exception e) {
             System.err.println(e);
         }
 
-        return mediciones;
+        return actividades;
     }
+    
 }

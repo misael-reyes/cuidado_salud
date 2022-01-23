@@ -19,7 +19,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -35,8 +34,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Medicion.findByFecha", query = "SELECT m FROM Medicion m WHERE m.fecha = :fecha"),
     @NamedQuery(name = "Medicion.findByPeso", query = "SELECT m FROM Medicion m WHERE m.peso = :peso"),
     @NamedQuery(name = "Medicion.findByCintura", query = "SELECT m FROM Medicion m WHERE m.cintura = :cintura"),
-    @NamedQuery(name = "Medicion.findByCadera", query = "SELECT m FROM Medicion m WHERE m.cadera = :cadera"),
-    @NamedQuery(name = "Medicion.findByActividad", query = "SELECT m FROM Medicion m WHERE m.actividad = :actividad")})
+    @NamedQuery(name = "Medicion.findByCadera", query = "SELECT m FROM Medicion m WHERE m.cadera = :cadera")})
 public class Medicion implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -54,9 +52,6 @@ public class Medicion implements Serializable {
     private Integer cintura;
     @Column(name = "CADERA")
     private Integer cadera;
-    @Size(max = 100)
-    @Column(name = "ACTIVIDAD")
-    private String actividad;
     @JoinColumn(name = "USUARIO", referencedColumnName = "IDUSUARIO")
     @ManyToOne
     private Usuario usuario;
@@ -106,14 +101,6 @@ public class Medicion implements Serializable {
 
     public void setCadera(Integer cadera) {
         this.cadera = cadera;
-    }
-
-    public String getActividad() {
-        return actividad;
-    }
-
-    public void setActividad(String actividad) {
-        this.actividad = actividad;
     }
 
     public Usuario getUsuario() {

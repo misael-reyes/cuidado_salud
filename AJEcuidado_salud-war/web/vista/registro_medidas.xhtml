@@ -13,7 +13,7 @@
                 <center>
                     <f:view>
                         <h:form>
-                            <h2><h:outputText value="Ingrese las medidas"/></h2>
+                            <h1><h:outputText value="Registrar datos antropometricos"/></h1>
                             <h:panelGrid columns="2">
                                 <h:outputLabel value="Peso(kg):" for="peso" />
                                 <h:inputText id="peso" value="#{acceso.medicion.peso}" title="Peso" />
@@ -21,8 +21,6 @@
                                 <h:inputText id="cintura" value="#{acceso.medicion.cintura}" title="Cintura" />
                                 <h:outputLabel value="Cadera(cm):" for="cadera" />
                                 <h:inputText id="cadera" value="#{acceso.medicion.cadera}" title="Cadera" />
-                                <h:outputLabel value="Actividad:" for="actividad" />
-                                <h:inputText id="actividad" value="#{acceso.medicion.actividad}" title="Actividad" />
                             </h:panelGrid>
                             <br />
                             <h:commandButton value="Registrar" actionListener="#{acceso.registroMediciones()}" />

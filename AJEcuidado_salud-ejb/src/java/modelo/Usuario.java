@@ -40,6 +40,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Usuario.findByEstatura", query = "SELECT u FROM Usuario u WHERE u.estatura = :estatura")})
 public class Usuario implements Serializable {
 
+    @OneToMany(mappedBy = "usuario")
+    private Collection<Actividadusuario> actividadusuarioCollection;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -149,6 +152,15 @@ public class Usuario implements Serializable {
     @Override
     public String toString() {
         return "modelo.Usuario[ idusuario=" + idusuario + " ]";
+    }
+
+    @XmlTransient
+    public Collection<Actividadusuario> getActividadusuarioCollection() {
+        return actividadusuarioCollection;
+    }
+
+    public void setActividadusuarioCollection(Collection<Actividadusuario> actividadusuarioCollection) {
+        this.actividadusuarioCollection = actividadusuarioCollection;
     }
     
 }
